@@ -191,6 +191,7 @@ Found a bug? Have a feature idea? Open an issue or submit a pull request!
 - [Font Awesome](https://fontawesome.com) for icons
 - [PDF.js](https://mozilla.github.io/pdf.js/) for PDF parsing
 - [Google Fonts](https://fonts.google.com) - Fira Code for that authentic terminal look
+- - [SolvyrEryx](https://github.com/SolvyrEryx) - Collaboration & development support
 
 ---
 
