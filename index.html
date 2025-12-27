@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>root@vyapari-agent:~</title>
     <meta name="description" content="Vyapari AI Terminal Interface.">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- PDF.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     </script>
-    
+
     <!-- Google Fonts: Fira Code -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Markdown Parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
@@ -77,14 +79,20 @@
         }
 
         /* Selection Color */
-        ::selection { background: #4af626; color: #000000; }
-        
+        ::selection {
+            background: #4af626;
+            color: #000000;
+        }
+
         /* CRT Scanline Effect */
         body::before {
             content: " ";
             display: block;
             position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
             z-index: 100;
             background-size: 100% 2px, 3px 100%;
@@ -93,10 +101,23 @@
         }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #0c0c0c; border-left: 1px solid #222; }
-        ::-webkit-scrollbar-thumb { background: #333; border: 1px solid #000; }
-        ::-webkit-scrollbar-thumb:hover { background: #4af626; }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0c0c0c;
+            border-left: 1px solid #222;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border: 1px solid #000;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4af626;
+        }
 
         /* Tree Links */
         .tree-link {
@@ -106,9 +127,24 @@
             cursor: pointer;
             display: inline-block;
         }
-        .tree-link:hover { color: #4af626; text-shadow: 0 0 8px rgba(74, 246, 38, 0.5); }
-        .tree-link.active { color: #4af626; font-weight: 700; }
-        .tree-link.active::before { content: '>'; position: absolute; left: -14px; color: #4af626; animation: blink 1s step-end infinite; }
+
+        .tree-link:hover {
+            color: #4af626;
+            text-shadow: 0 0 8px rgba(74, 246, 38, 0.5);
+        }
+
+        .tree-link.active {
+            color: #4af626;
+            font-weight: 700;
+        }
+
+        .tree-link.active::before {
+            content: '>';
+            position: absolute;
+            left: -14px;
+            color: #4af626;
+            animation: blink 1s step-end infinite;
+        }
 
         /* Term Card (Modals) */
         .term-card {
@@ -117,6 +153,7 @@
             box-shadow: 0 0 0 1px #111;
             position: relative;
         }
+
         .term-card.active-modal {
             border-color: #4af626;
             box-shadow: 0 0 20px rgba(74, 246, 38, 0.1);
@@ -129,58 +166,113 @@
             border-left: 1px solid #222;
             transition: border-color 0.3s ease;
         }
-        .chat-msg:hover { border-left-color: #4af626; }
-        
+
+        .chat-msg:hover {
+            border-left-color: #4af626;
+        }
+
         /* Markdown Overrides */
-        .prose code { background: #1a1a1a; padding: 0.2em 0.4em; border-radius: 3px; color: #eab308; font-size: 0.9em; }
-        .prose pre { background: #111; border: 1px solid #333; padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0; }
-        .prose strong { color: #fff; }
-        .prose ul { list-style-type: disc; padding-left: 1.5rem; }
-        .prose a { color: #3b82f6; text-decoration: underline; }
-        
+        .prose code {
+            background: #1a1a1a;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            color: #eab308;
+            font-size: 0.9em;
+        }
+
+        .prose pre {
+            background: #111;
+            border: 1px solid #333;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .prose strong {
+            color: #fff;
+        }
+
+        .prose ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+
+        .prose a {
+            color: #3b82f6;
+            text-decoration: underline;
+        }
+
         /* Input Glow */
         .input-glow:focus {
             text-shadow: 0 0 5px rgba(74, 246, 38, 0.5);
         }
-        
+
         /* Glitch text effect for title */
         .glitch-text:hover {
             animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
             color: #4af626;
         }
+
         @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
+            0% {
+                transform: translate(0)
+            }
+
+            20% {
+                transform: translate(-2px, 2px)
+            }
+
+            40% {
+                transform: translate(-2px, -2px)
+            }
+
+            60% {
+                transform: translate(2px, 2px)
+            }
+
+            80% {
+                transform: translate(2px, -2px)
+            }
+
+            100% {
+                transform: translate(0)
+            }
         }
     </style>
 </head>
+
 <body class="antialiased h-screen flex flex-col lg:flex-row overflow-hidden">
 
     <!-- Mobile Header -->
-    <header class="lg:hidden fixed w-full z-50 bg-[#0c0c0c] border-b border-term-border px-4 py-3 flex justify-between items-center shadow-md">
+    <header
+        class="lg:hidden fixed w-full z-50 bg-[#0c0c0c] border-b border-term-border px-4 py-3 flex justify-between items-center shadow-md">
         <div class="text-sm font-bold tracking-tight text-term-green">root@vyapari:~#</div>
-        <button id="mobile-menu-btn" class="text-term-green hover:text-white p-2 focus:outline-none border border-transparent hover:border-term-border rounded">
+        <button id="mobile-menu-btn"
+            class="text-term-green hover:text-white p-2 focus:outline-none border border-transparent hover:border-term-border rounded">
             <span class="text-lg font-mono">[LS]</span>
         </button>
     </header>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 backdrop-blur-sm transform translate-x-full transition-transform duration-300 lg:hidden pt-20 px-6 border-l border-term-border">
+    <div id="mobile-menu"
+        class="fixed inset-0 z-40 bg-black/95 backdrop-blur-sm transform translate-x-full transition-transform duration-300 lg:hidden pt-20 px-6 border-l border-term-border">
         <nav class="space-y-6 text-base font-mono">
             <div class="text-gray-500 text-xs tracking-widest border-b border-gray-800 pb-2"># SYSTEM_CONTROLS</div>
-            <button onclick="document.getElementById('file-upload').click(); toggleMobileMenu()" class="block w-full text-left text-term-green hover:pl-2 transition-all">> ./mount_file</button>
-            <button onclick="toggleAccessModal(); toggleMobileMenu()" class="block w-full text-left text-term-yellow hover:pl-2 transition-all">> ./auth_module</button>
-            <button onclick="clearFile(); toggleMobileMenu()" class="block w-full text-left text-term-red hover:pl-2 transition-all">> ./purge_context</button>
-            <button onclick="openApiKeyModal(); toggleMobileMenu()" class="block w-full text-left text-term-purple hover:pl-2 transition-all">> ./config_keys</button>
+            <button onclick="document.getElementById('file-upload').click(); toggleMobileMenu()"
+                class="block w-full text-left text-term-green hover:pl-2 transition-all">> ./mount_file</button>
+            <button onclick="toggleAccessModal(); toggleMobileMenu()"
+                class="block w-full text-left text-term-yellow hover:pl-2 transition-all">> ./auth_module</button>
+            <button onclick="clearFile(); toggleMobileMenu()"
+                class="block w-full text-left text-term-red hover:pl-2 transition-all">> ./purge_context</button>
+            <button onclick="openApiKeyModal(); toggleMobileMenu()"
+                class="block w-full text-left text-term-purple hover:pl-2 transition-all">> ./config_keys</button>
         </nav>
     </div>
 
     <!-- Desktop Sidebar (Tree Style) -->
-    <aside class="hidden lg:flex flex-col w-72 h-full bg-[#0a0a0a] border-r border-term-border z-10 font-mono text-sm leading-relaxed shrink-0">
+    <aside
+        class="hidden lg:flex flex-col w-72 h-full bg-[#0a0a0a] border-r border-term-border z-10 font-mono text-sm leading-relaxed shrink-0">
         <div class="p-6 pb-4 border-b border-gray-900/50">
             <div class="group cursor-default">
                 <h1 class="text-lg font-bold text-term-green mb-1 glitch-text">
@@ -193,64 +285,69 @@
 
         <nav class="p-6 flex-1 overflow-y-auto overflow-x-hidden">
             <div class="text-gray-600 mb-2 select-none">.</div>
-            
+
             <!-- Context Directory -->
             <div class="flex items-center">
-                <span class="text-gray-700 mr-2">├──</span> 
+                <span class="text-gray-700 mr-2">├──</span>
                 <span class="text-term-blue font-bold">mnt/context/</span>
             </div>
             <div class="border-l border-gray-800 ml-[7px] pl-4">
                 <div class="flex items-center group cursor-pointer py-1">
-                    <span class="text-gray-700 mr-2">├──</span> 
+                    <span class="text-gray-700 mr-2">├──</span>
                     <label for="file-upload" class="tree-link text-gray-400 group-hover:text-term-green">
                         upload_data.sh
-                        <input id="file-upload" type="file" class="hidden" accept=".pdf,.txt,.md,.js,.py,.json,.html,.css,.csv,.ts" />
+                        <input id="file-upload" type="file" class="hidden"
+                            accept=".pdf,.txt,.md,.js,.py,.json,.html,.css,.csv,.ts" />
                     </label>
                 </div>
                 <!-- Loaded File Indicator -->
                 <div id="file-indicator" class="hidden transition-all duration-300">
                     <div class="flex items-center py-1">
-                        <span class="text-gray-700 mr-2">└──</span> 
-                        <span id="current-filename" class="text-term-green font-bold text-xs truncate max-w-[140px]">data.txt</span>
+                        <span class="text-gray-700 mr-2">└──</span>
+                        <span id="current-filename"
+                            class="text-term-green font-bold text-xs truncate max-w-[140px]">data.txt</span>
                         <span class="text-term-dim text-[10px] ml-2">[RO]</span>
                     </div>
                     <div class="pl-6 pt-1">
-                         <button onclick="clearFile()" class="text-[10px] text-term-red hover:underline hover:text-red-400 flex items-center gap-1">
+                        <button onclick="clearFile()"
+                            class="text-[10px] text-term-red hover:underline hover:text-red-400 flex items-center gap-1">
                             > unmount
-                         </button>
+                        </button>
                     </div>
                 </div>
                 <div id="no-file-indicator" class="flex items-center py-1">
-                    <span class="text-gray-700 mr-2">└──</span> 
+                    <span class="text-gray-700 mr-2">└──</span>
                     <span class="text-gray-600 italic text-xs">empty_slot</span>
                 </div>
             </div>
 
             <!-- System Directory -->
             <div class="flex items-center mt-6">
-                <span class="text-gray-700 mr-2">├──</span> 
+                <span class="text-gray-700 mr-2">├──</span>
                 <span class="text-term-yellow font-bold">usr/bin/</span>
             </div>
             <div class="border-l border-gray-800 ml-[7px] pl-4">
                 <div class="flex items-center py-1">
-                    <span class="text-gray-700 mr-2">├──</span> 
+                    <span class="text-gray-700 mr-2">├──</span>
                     <button onclick="toggleAccessModal()" class="tree-link text-gray-400">auth_manager</button>
                 </div>
                 <div class="flex items-center py-1">
-                    <span class="text-gray-700 mr-2">└──</span> 
-                    <span class="text-gray-500">credits: <span id="credit-display" class="text-term-yellow font-bold">0</span></span>
+                    <span class="text-gray-700 mr-2">└──</span>
+                    <span class="text-gray-500">credits: <span id="credit-display"
+                            class="text-term-yellow font-bold">0</span></span>
                 </div>
             </div>
 
             <!-- Config Directory -->
             <div class="flex items-center mt-6">
-                <span class="text-gray-700 mr-2">└──</span> 
+                <span class="text-gray-700 mr-2">└──</span>
                 <span class="text-term-purple font-bold">etc/config/</span>
             </div>
             <div class="ml-[7px] pl-4">
-                 <div class="flex items-center py-1">
-                    <span class="text-gray-700 mr-2">└──</span> 
-                    <button onclick="openApiKeyModal()" class="tree-link text-gray-400 hover:text-term-purple">api_secrets.conf</button>
+                <div class="flex items-center py-1">
+                    <span class="text-gray-700 mr-2">└──</span>
+                    <button onclick="openApiKeyModal()"
+                        class="tree-link text-gray-400 hover:text-term-purple">api_secrets.conf</button>
                 </div>
             </div>
 
@@ -266,9 +363,10 @@
 
     <!-- Main Content -->
     <main class="flex-1 flex flex-col relative h-full bg-term-bg min-w-0">
-        
+
         <!-- Sticky Header (Command Bar) -->
-        <div class="sticky top-0 z-20 bg-[#0c0c0c]/95 backdrop-blur-md border-b border-term-border px-6 py-3 flex items-center justify-between shadow-[0_4px_20px_-10px_rgba(0,0,0,0.8)]">
+        <div
+            class="sticky top-0 z-20 bg-[#0c0c0c]/95 backdrop-blur-md border-b border-term-border px-6 py-3 flex items-center justify-between shadow-[0_4px_20px_-10px_rgba(0,0,0,0.8)]">
             <div class="flex items-center gap-4 text-sm font-mono overflow-hidden">
                 <div class="flex items-center gap-2 shrink-0">
                     <span class="w-2 h-2 rounded-full bg-term-green animate-pulse"></span>
@@ -277,11 +375,12 @@
                 <div class="text-gray-600 hidden sm:block">|</div>
                 <div class="flex items-center gap-2 text-gray-400 shrink-0">
                     <span class="text-term-blue">Target:</span>
-                    <span class="font-bold text-gray-300">Mistral_Agent_v1</span>
+                    <span class="font-bold text-gray-300">Codestral</span>
                 </div>
             </div>
-            
-            <div id="toast" class="text-xs font-mono text-term-green border border-term-dim px-2 py-1 rounded bg-[#0a1a0a] opacity-0 transition-opacity duration-300">
+
+            <div id="toast"
+                class="text-xs font-mono text-term-green border border-term-dim px-2 py-1 rounded bg-[#0a1a0a] opacity-0 transition-opacity duration-300">
                 Process Complete
             </div>
         </div>
@@ -289,11 +388,12 @@
         <!-- Terminal Output Area -->
         <div id="terminal-interface" class="flex-1 overflow-y-auto p-4 lg:p-8 scroll-smooth">
             <div id="chat-container" class="max-w-4xl mx-auto space-y-6 font-mono text-sm pb-8">
-                
+
                 <!-- Boot Message -->
                 <div class="text-xs text-gray-500 mb-8 border-b border-dashed border-gray-800 pb-4">
                     <p>> initializing_neural_link...</p>
-                    <p>> connecting to ag_019b4f10960d730e8182f260fbb8be2b... <span class="text-term-green">OK</span></p>
+                    <p>> connecting to ag_019b4f10960d730e8182f260fbb8be2b... <span class="text-term-green">OK</span>
+                    </p>
                     <p>> mounting file system... <span class="text-term-green">OK</span></p>
                     <p>> system ready.</p>
                     <br>
@@ -310,10 +410,12 @@
                 <form id="chat-form" onsubmit="handleChat(event)" class="flex items-center gap-3">
                     <span class="text-term-green font-bold text-lg select-none">>></span>
                     <div class="flex-1 relative">
-                        <input type="text" id="user-input" 
-                            class="w-full bg-transparent border-b border-gray-800 text-term-white font-mono py-2 focus:outline-none focus:border-term-green transition-colors input-glow placeholder-gray-800" 
-                            placeholder="Enter command or natural language query..." autocomplete="off" spellcheck="false">
-                        <div class="absolute right-0 top-2 text-[10px] text-gray-700 hidden sm:block">RETURN to exec</div>
+                        <input type="text" id="user-input"
+                            class="w-full bg-transparent border-b border-gray-800 text-term-white font-mono py-2 focus:outline-none focus:border-term-green transition-colors input-glow placeholder-gray-800"
+                            placeholder="Enter command or natural language query..." autocomplete="off"
+                            spellcheck="false">
+                        <div class="absolute right-0 top-2 text-[10px] text-gray-700 hidden sm:block">RETURN to exec
+                        </div>
                     </div>
                 </form>
             </div>
@@ -321,14 +423,15 @@
     </main>
 
     <!-- OTP Modal (Retro Style) -->
-    <div id="access-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+    <div id="access-modal"
+        class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
         <div class="term-card active-modal w-full max-w-md p-1">
             <!-- Modal Header -->
             <div class="bg-[#1a1a1a] px-3 py-1 flex justify-between items-center border-b border-[#333]">
                 <span class="text-xs font-bold text-gray-400">AUTH_MODULE.EXE</span>
                 <button onclick="toggleAccessModal()" class="text-term-red hover:text-white text-xs">[X]</button>
             </div>
-            
+
             <div class="p-6 space-y-6 font-mono">
                 <div class="text-center">
                     <i class="fa-solid fa-lock text-3xl text-term-yellow mb-2"></i>
@@ -342,7 +445,8 @@
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-xs text-term-blue font-bold">STEP 1: REQUEST_TOKEN</span>
                         </div>
-                        <button onclick="requestOtp()" id="otp-btn" class="w-full text-left text-xs text-gray-400 hover:text-term-green hover:bg-[#111] p-2 border border-transparent hover:border-term-dim transition-all">
+                        <button onclick="requestOtp()" id="otp-btn"
+                            class="w-full text-left text-xs text-gray-400 hover:text-term-green hover:bg-[#111] p-2 border border-transparent hover:border-term-dim transition-all">
                             > ./generate_otp.sh
                         </button>
                         <div id="otp-log" class="text-[10px] text-term-dim mt-1 pl-2 h-4"></div>
@@ -355,8 +459,10 @@
                         </div>
                         <div class="flex gap-2 items-center">
                             <span class="text-term-green">$</span>
-                            <input type="text" id="otp-input" placeholder="Input 6-digit hash" class="bg-transparent border-b border-gray-700 text-white w-full text-sm py-1 focus:border-term-green focus:outline-none">
-                            <button onclick="verifyOtp()" class="px-3 py-1 bg-term-dim text-white text-xs hover:bg-term-green hover:text-black font-bold transition-colors">EXEC</button>
+                            <input type="text" id="otp-input" placeholder="Input 6-digit hash"
+                                class="bg-transparent border-b border-gray-700 text-white w-full text-sm py-1 focus:border-term-green focus:outline-none">
+                            <button onclick="verifyOtp()"
+                                class="px-3 py-1 bg-term-dim text-white text-xs hover:bg-term-green hover:text-black font-bold transition-colors">EXEC</button>
                         </div>
                     </div>
                 </div>
@@ -365,30 +471,35 @@
     </div>
 
     <!-- API Key Modal (Retro Style) -->
-    <div id="api-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
+    <div id="api-modal"
+        class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
         <div class="term-card w-full max-w-lg p-1 border-term-purple">
-             <div class="bg-[#1a1a1a] px-3 py-1 flex justify-between items-center border-b border-[#333]">
+            <div class="bg-[#1a1a1a] px-3 py-1 flex justify-between items-center border-b border-[#333]">
                 <span class="text-xs font-bold text-term-purple">CONFIG_EDITOR</span>
                 <button onclick="closeApiKeyModal()" class="text-gray-500 hover:text-white text-xs">[ESC]</button>
             </div>
-            
+
             <div class="p-6 font-mono space-y-4">
                 <p class="text-gray-400 text-xs border-l-2 border-term-purple pl-3">
                     Edit system configuration variable <span class="text-white">MISTRAL_API_KEY</span>.<br>
                     Values are stored in volatile memory (session).
                 </p>
-                
+
                 <div class="mt-4">
                     <label class="text-[10px] text-gray-500 uppercase tracking-widest">Variable Value:</label>
                     <div class="flex items-center gap-2 mt-1">
                         <span class="text-term-purple font-bold">key=</span>
-                        <input type="password" id="new-api-key" class="flex-1 bg-[#111] border border-gray-700 text-term-purple p-2 text-xs focus:border-term-purple outline-none font-mono tracking-widest" placeholder="secret_...">
+                        <input type="password" id="new-api-key"
+                            class="flex-1 bg-[#111] border border-gray-700 text-term-purple p-2 text-xs focus:border-term-purple outline-none font-mono tracking-widest"
+                            placeholder="secret_...">
                     </div>
                 </div>
 
                 <div class="flex justify-end gap-3 mt-6">
-                    <button onclick="closeApiKeyModal()" class="text-gray-500 text-xs hover:text-white hover:underline">cancel()</button>
-                    <button onclick="saveApiKey()" class="text-black bg-term-purple px-4 py-1 text-xs font-bold hover:bg-white transition-colors">write_changes()</button>
+                    <button onclick="closeApiKeyModal()"
+                        class="text-gray-500 text-xs hover:text-white hover:underline">cancel()</button>
+                    <button onclick="saveApiKey()"
+                        class="text-black bg-term-purple px-4 py-1 text-xs font-bold hover:bg-white transition-colors">write_changes()</button>
                 </div>
             </div>
         </div>
@@ -408,7 +519,7 @@
         // --- CONFIGURATION ---
         const AGENT_ID = "ag_019b4f10960d730e8182f260fbb8be2b";
         let API_KEY = "blAJT7bc5KHXR5UG3MbHl5OoyNF9Z9Jv";
-const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS-SEFGGE9G9WHU86WpyS-A2I2gFVNj7C-EKN0UO05JuorzSNE1o6j1zME3zgCs3";
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS-SEFGGE9G9WHU86WpyS-A2I2gFVNj7C-EKN0UO05JuorzSNE1o6j1zME3zgCs3";
 
         // --- STATE ---
         let state = {
@@ -453,7 +564,7 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
 
         function saveApiKey() {
             const newKey = document.getElementById('new-api-key').value.trim();
-            if(newKey) {
+            if (newKey) {
                 API_KEY = newKey;
                 showToast("Key Updated");
                 addMessageToUI('system', 'System: Configuration reloaded. Secure connection pending...');
@@ -478,7 +589,7 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
                 const pdf = await loadingTask.promise;
                 let fullText = '';
                 const maxPages = pdf.numPages;
-                
+
                 for (let i = 1; i <= maxPages; i++) {
                     const page = await pdf.getPage(i);
                     const textContent = await page.getTextContent();
@@ -492,7 +603,7 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
             }
         }
 
-        document.getElementById('file-upload').addEventListener('change', async function(e) {
+        document.getElementById('file-upload').addEventListener('change', async function (e) {
             const file = e.target.files[0];
             if (!file) return;
             showToast(`Mounting: ${file.name}`);
@@ -510,12 +621,12 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
                 }
                 state.currentFileContent = content;
                 state.currentFileName = file.name;
-                
+
                 // Update UI
                 document.getElementById('current-filename').innerText = file.name;
                 document.getElementById('file-indicator').classList.remove('hidden');
                 document.getElementById('no-file-indicator').classList.add('hidden');
-                
+
                 showToast("Mount Successful");
                 addMessageToUI('system', `> File system mounted: '${file.name}' (${content.length} bytes) read-only access.`);
             } catch (err) {
@@ -527,7 +638,7 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
         function clearFile() {
             state.currentFileContent = null;
             state.currentFileName = null;
-            document.getElementById('file-upload').value = ''; 
+            document.getElementById('file-upload').value = '';
             document.getElementById('file-indicator').classList.add('hidden');
             document.getElementById('no-file-indicator').classList.remove('hidden');
             showToast("Volume Unmounted");
@@ -539,14 +650,14 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
             const btn = document.getElementById('otp-btn');
             const log = document.getElementById('otp-log');
             if (state.otpTimer) clearTimeout(state.otpTimer);
-            
+
             btn.innerHTML = "<span class='animate-pulse'>...contacting_server</span>";
             log.innerText = "";
 
             const code = Math.floor(100000 + Math.random() * 900000).toString();
             state.otp = code;
-            state.otpTimer = setTimeout(() => { state.otp = null; showToast("Token Expired"); }, 120000); 
-            
+            state.otpTimer = setTimeout(() => { state.otp = null; showToast("Token Expired"); }, 120000);
+
             try {
                 const payload = { content: `\`\`\`diff\n+ [ACCESS REQUEST]\n+ CODE: ${code}\n+ ORIGIN: TERM_V2\n\`\`\`` };
                 await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
@@ -582,10 +693,10 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
         function addMessageToUI(role, text) {
             const container = document.getElementById('chat-container');
             const div = document.createElement('div');
-            
+
             let roleColor = 'text-term-blue';
             let roleName = 'root@ai';
-            
+
             if (role === 'user') {
                 roleColor = 'text-term-green';
                 roleName = 'user@vyapari';
@@ -595,7 +706,7 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
             }
 
             const time = new Date().toLocaleTimeString();
-            
+
             // Markdown parsing
             let htmlContent = role === 'system' ? text : marked.parse(text);
 
@@ -607,7 +718,7 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
                 <div class="text-gray-300 prose prose-invert max-w-none text-sm leading-relaxed font-mono">${htmlContent}</div>
             `;
             container.appendChild(div);
-            
+
             // Scroll to bottom of terminal
             const terminalInterface = document.getElementById('terminal-interface');
             terminalInterface.scrollTop = terminalInterface.scrollHeight;
@@ -643,7 +754,7 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
                 showToast("HALT: 0 Credits");
                 return;
             }
-            
+
             if (!state.currentFileContent) {
                 showToast("HALT: Context Empty");
                 addMessageToUI('system', 'Error: No file mounted. Please use ./mount_file command first.');
@@ -688,7 +799,7 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
 
                 if (!response.ok) {
                     if (response.status === 401 || response.status === 403) {
-                         throw new Error("UNAUTHORIZED");
+                        throw new Error("UNAUTHORIZED");
                     }
                     const errText = await response.text();
                     throw new Error(`API Status: ${response.status}`);
@@ -700,7 +811,7 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
                 removeTypingIndicator();
                 addMessageToUI('assistant', aiReply);
 
-                state.messages.push({ role: "user", content: text }); 
+                state.messages.push({ role: "user", content: text });
                 state.messages.push({ role: "assistant", content: aiReply });
                 if (state.messages.length > 6) state.messages = state.messages.slice(-6);
 
@@ -718,4 +829,5 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
         }
     </script>
 </body>
+
 </html>
