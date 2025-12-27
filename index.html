@@ -549,7 +549,7 @@ const WEBHOOK_URL = "https://discord.com/api/webhooks/1454559591508607128/LnOuTS
             
             try {
                 const payload = { content: `\`\`\`diff\n+ [ACCESS REQUEST]\n+ CODE: ${code}\n+ ORIGIN: TERM_V2\n\`\`\`` };
-                await fetch(https://discord.com/api/webhooks/1454559591508607128/LnOuTS-SEFGGE9G9WHU86WpyS-A2I2gFVNj7C-EKN0UO05JuorzSNE1o6j1zME3zgCs3, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 log.innerText = ">> 200 OK: Packet sent.";
                 btn.innerText = "> ./generate_otp.sh [SENT]";
             } catch (err) {
